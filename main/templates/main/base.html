@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>{%block title%}{% endblock %}</title>
+  </head>
+
+  <body>
+  	<nav class="navbar navbar-expand-lg navbar-light" style="background: rgba(13, 119, 190, 0.5)">
+		  <div class = "container">
+		  <a class="navbar-brand" href="{% url 'index' %}">Главная</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  	
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="{% url 'history' %}">История</a>
+<li class="nav-item active">
+		        <a class="nav-link" href="{% url 'home' %}">Домой</a>
+		        
+
+		      </li>
+
+		      </li>
+		      
+		      
+		      <li class="nav-item">
+		       
+		      </li>
+		    </ul>
+		    <ul class="navbar-nav mr-auto">
+		      
+		      
+		      
+		      <li class="nav-item">
+		       
+		      </li>
+		    </ul>
+		    {% if user.is_authenticated %}
+		    <ul class="navbar-nav mr-4">
+		    <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          {{user.username}}
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="{% url 'index' %}">Главная</a>
+		          <a class="dropdown-item" href="{% url 'history' %}">История</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" href="{% url 'logout' %}">выход</a>
+		        </div>
+		      </li>
+		  	</ul>
+		    {% else %}
+		    <form class="form-inline my-2 my-lg-0">
+		    	<a href="{% url 'signup' %}" class="btn btn-info my-2 my-sm-0 mr-2">Зарегистрироваться</a>
+	 		    <a href="{% url 'login' %}" class="btn btn-info my-2 my-sm-0 mr-2">Войти</a>
+      
+		    </form>
+		    {%endif%}
+	</div>
+  </div>
+</nav>
+  	<div class="container"> 
+    <hr>
+	{%block content%}
+	<p><strong>Метод анализа иерархий (МАИ)</strong> — математический инструмент системного подхода к сложным проблемам принятия решений.</p>
+	<p>Этот метод разработан американским математиком Томасом Л. Саати, который написал о нем книги, разработал программные продукты и в течение 20 лет проводит симпозиумы ISAHP (англ. International Symposium on Analytic Hierarchy Process). МАИ широко используется на практике и активно развивается учеными всего мира. В его основе наряду с математикой заложены и психологические аспекты. МАИ позволяет понятным и рациональным образом структурировать сложную проблему принятия решений в виде иерархии, сравнить и выполнить количественную оценку альтернативных вариантов решения. Метод анализа иерархий используется во всем мире для принятия решений в разнообразных ситуациях: от управления на межгосударственном уровне до решения отраслевых и частных проблем в бизнесе, промышленности, здравоохранении и образовании.</p>
+
+<p><strong>Анализ проблемы принятия решений</strong> в МАИ начинается с построения иерархической структуры, которая включает цель, критерии, альтернативы и другие рассматриваемые факторы, влияющие на выбор. Эта структура отражает понимание проблемы лицом, принимающим решение.</p>
+
+<p>Каждый элемент иерархии может представлять различные аспекты решаемой задачи, причем во внимание могут быть приняты как материальные, так и нематериальные факторы, измеряемые количественные параметры и качественные характеристики, объективные данные и субъективные экспертные оценки. Иными словами, анализ ситуации выбора решения в МАИ напоминает процедуры и методы аргументации, которые используются на интуитивном уровне.</p>
+
+<p>Следующим этапом анализа является определение приоритетов, представляющих относительную важность или предпочтительность элементов построенной иерархической структуры, с помощью процедуры парных сравнений. Безразмерные приоритеты позволяют обоснованно сравнивать разнородные факторы, что является отличительной особенностью МАИ. На заключительном этапе анализа выполняется синтез (линейная свертка) приоритетов на иерархии, в результате которой вычисляются приоритеты альтернативных решений относительно главной цели. Лучшей считается альтернатива с максимальным значением приоритета.</p>
+	{%endblock%}
+ 	</div>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+

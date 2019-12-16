@@ -1,0 +1,287 @@
+{% extends 'main/base.html' %}
+{%block content%}
+<div class="container">
+<h1>Метод анализа Иерархий</h1>
+<div class="container">
+<form method="POST" class="form-inline" action="index">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="row">
+ <div class="col-50">
+            <div class="input_fields_container_part">
+                <div class="xxx">
+                    <input type="text" name="firstlist">
+                    <button class="btn btn-outline-success my-2 my-sm-0 mr-2 add_more_button">Добавить критерий</button>
+                </div>
+            </div>
+        </div> 
+
+    
+    <div class="col-50">
+        <div class="input_fields_container_part2">
+            <div class="xxx">
+                <input type="text" name="tags2">
+                <button class="btn btn-outline-success my-2 my-sm-0 mr-2 add_more_button2">Добавить вариант</button>
+            </div>
+        </div>
+    </div>
+ 
+    
+          <div class="col-30">
+            <p>        </p>
+        </div>        
+                          
+          <div class="col-60 mr-10">
+        <input type="submit" name="action" class="btn btn-outline-success my-2 my-sm-0 mr-2" value="Создать Иерархию" > 
+    </div>
+    </div>
+    </form>
+    <div class="container">
+        <p class="h5" style="color: rgba(200, 70, 19, 1)">{{error}}</p>
+    </div>
+</div >
+<table class="table table-bordered">
+    <tr>
+      <th scope="col">Критерии:</th>
+      {% for i in outcriterian %}
+      <th scope="col">{{i}}</th>
+      {%endfor%}
+    </tr>
+    <tr>
+      <th scope="col">Варианты:</th>
+      {%for i in outvariants%}
+      <th scope="col">{{i}}</th>
+      {%endfor%}
+    </tr>
+  </table>
+
+<div>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    FAQ по странице
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+<strong>1.Предварительное ранжирование критериев</strong>
+
+<p>Попарное сравнение критериев по важности по девятибалльной шкале с составлением соответствующей матрицы (таблицы) размера (n х n). Система парных сведений приводит к результату, который может быть представлен в виде обратно симметричной матрицы. Элементом матрицы a(i,j) является интенсивность проявления элемента иерархии i относительно элемента иерархии j, оцениваемая по шкале интенсивности от 1 до 9, где оценки имеют следующий смысл:</p>
+<p>равная важность – 1;</p>
+<p>умеренное превосходство – 3;</p>
+<p>значительное превосходство – 5;</p>
+<p>сильное превосходство – 7;</p>
+<p>очень сильное превосходство – 9;</p>
+<p>в промежуточных случаях ставятся четные оценки: 2, 4, 6, 8 (например, 4 – между умеренным и значительным превосходством).
+Ранжирование вариантов, в результате которого они располагаются в порядке убывания важности (значимости).</p>
+<strong>2.Попарное сравнение вариантов по важности</strong>
+<p>Попарное сравнение вариантов по важности по девятибалльной шкале с составлением соответствующей матрицы (таблицы) размера (n х n). Система парных сведений приводит к результату, который может быть представлен в виде обратно симметричной матрицы. Элементом матрицы a(i,j) является интенсивность проявления элемента иерархии i относительно элемента иерархии j, оцениваемая по шкале интенсивности от 1 до 9, где оценки имеют следующий смысл:</p>
+<p>равная важность – 1;</p>
+<p>умеренное превосходство – 3;</p>
+<p>значительное превосходство – 5;</p>
+<p>сильное превосходство – 7;</p>
+<p>очень сильное превосходство – 9;</p>
+в промежуточных случаях ставятся четные оценки: 2, 4, 6, 8 (например, 4 – между умеренным и значительным превосходством).
+  </div>
+</div>
+</div>
+<H2>1.Предварительное ранжирование критериев</H2>
+    <form method="POST" action="finish" value="calculate">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+        <table class ="table">
+    {% for criteriaf in outcriterian %}
+        {% for criterias in outcriterian %}
+            {% if criteriaf != criterias and forloop.counter > forloop.parentloop.counter0 %}
+
+        <tr>
+              <th scope="col"><p>Критерий {{criteriaf}} имеет </p></th>
+                   <th scope="col"> <select name="select" class="form-control form-control-lg" style="width:260px;height:70px;">
+                        <option value="0.1111">очень сильное отставание</option>
+                                        <option value="0.125">между очень сильным и сильным отставанием</option>
+                                        <option value="0.1428">значительное отставание</option>
+                                        <option value="0.1666">между сильным и значительным отставание</option>
+                                        <option value="0.2">значительное отставание</option>
+                                        <option value="0.25">между немного хуже и хуже</option>
+                                        <option value="0.3">умеренное отставание</option>
+                                        <option value="0.5">между умеренным отставанием и равной важностью</option>
+                                        <option value="1">равная важность</option>
+                                        <option value="2">между равной важностью и умеренным првесходством</option>
+                                        <option value="3">умеренное превосходство </option>
+                                        <option value="4">между умеренным и значительным превосходством</option>
+                                        <option value="5">значительное превосходство</option>
+                                        <option value="6">между значительным и сильным превосходством</option>
+                                        <option value="7">сильное превосходство</option>
+                                        <option value="8">между сильным и очень сильным превосходством</option>
+                                        <option value="9"> очень сильное превосходство</option>
+                    </select></th>
+                   <th scope="col"> относительно критерия {{criterias}}</th>
+                </p>
+                
+            
+    {% endif %}
+    {%endfor%}
+    {% endfor %}
+</tr>
+
+</table>
+</div>
+
+
+<H2>2.Ранжирование Вариантов относительного каждого критерия</H2>
+<div class="container">
+                        <div class="row">
+                         <div class="col text-center">
+                                <p class="h5" style="color: rgba(200, 70, 19, 1)">{{error2}}</a>
+                                      </div>
+                        </div>
+                    </div>
+    
+    <div>
+        <table class ="table table-striped" style="background: rgba(13, 119, 190, 0.5)">
+            {% for criteria in outcriterian %}
+                {% for variantf in outvariants %}
+                    {% for variants in outvariants %}
+                        {% if variantf != variants and forloop.counter > forloop.parentloop.counter0 %}
+        <tr class="table-secondary" style="background: rgba(13, 119, 190, 1)">
+            <th scope="col"><p class="h5">Относительно Критерия {{criteria}} вариант {{variantf}} имеет</p></th>
+                    <th scope="col"><select name="select2" class="form-control form-control-lg" style="width:260px;height:70px;background: rgba(17, 150, 24, 0.5)">
+                                        <option value="0.1111">очень сильное отставание</option>
+                                        <option value="0.125">между очень сильным и сильным отставанием</option>
+                                        <option value="0.1428">значительное отставание</option>
+                                        <option value="0.1666">между сильным и значительным отставание</option>
+                                        <option value="0.2">значительное отставание</option>
+                                        <option value="0.25">между немного хуже и хуже</option>
+                                        <option value="0.3">умеренное отставание</option>
+                                        <option value="0.5">между умеренным отставанием и равной важностью</option>
+                                        <option value="1">равная важность</option>
+                                        <option value="2">между равной важностью и умеренным првесходством</option>
+                                        <option value="3">умеренное превосходство </option>
+                                        <option value="4">между умеренным и значительным превосходством</option>
+                                        <option value="5">значительное превосходство</option>
+                                        <option value="6">между значительным и сильным превосходством</option>
+                                        <option value="7">сильное превосходство</option>
+                                        <option value="8">между сильным и очень сильным превосходством</option>
+                                        <option value="9"> очень сильное превосходство</option>
+                                    </select></th>
+                            <th scope="col"><p class="h5">Чем вариант {{variants}}</p></th>
+                        </tr>
+                {% endif %}
+            {%endfor%}
+        {% endfor %}
+    {%endfor%}
+        </table>
+
+    </div>
+
+    
+    
+    
+    
+    
+    <input type="hidden" name="len_criteria" value={{len_criteria}}>
+    <input type="hidden" name="len_variants" value={{len_variants}}>
+    <div class="row justify-content-center">
+        <div class="col-15">
+            <div class="card-body"> 
+                {{message_out}}
+    <input type="submit" class="btn btn-outline-success my-2 my-sm-0 mr-2" name= "action" value="Анализировать иерархию">
+                    </div>   
+            </div>
+        </div>
+</form>
+<div class="container" style="width: 600px;">
+<table class="table table-striped table-dark">
+        <th>Вариант</th>
+        <th>Результат</th>
+        {% for k in outvariants %}
+            {% for s in res%}
+                {% if forloop.counter0 == forloop.parentloop.counter0 %}
+     
+        <tr>
+            
+            <td>{{k}}</td><td>{{s}} % </td>
+            
+         </tr>
+         {%endif%}
+         {%endfor%}
+         {%endfor%}
+    </table>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="card-body">
+                <form method="POST" action="finish" value="save" class ="row justify-content-center">
+                {% csrf_token %}
+                    <div class="row justify-content-center">
+                        
+                             <div class="container">
+                        <div class="row">
+                         <div class="col text-center">
+                                <p class="h5">Для того что бы сохранить результат название анализа и нажмите на кнопку "Сохранить" 
+                                </p>
+                                      </div>
+                        </div>
+                    </div>
+                                     <div class="container">
+                        <div class="row">
+                         <div class="col text-center">
+                                <input type="text" name="selection_name" >
+                                <h3>{{message}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                       
+                    <input type="hidden" name="res" value={{res}}>
+                   <div class="container">
+                        <div class="row">
+                         <div class="col text-center">
+                     <input type="submit" class="btn btn-success " name= "action" value="Сохранить">
+                 </div>
+             </div>
+                 </div>
+                </form>
+            
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    var max_fields_limit      = 100; //set limit for maximum input fields
+    var x = 1; //initialize counter for text box
+    $('.add_more_button').click(function(e){ //click event on add more fields button having class add_more_button
+        e.preventDefault();
+        if(x < max_fields_limit){ //check conditions
+            x++; //counter increment
+            $('.input_fields_container_part').append('<div><input type="text" name="tags"/><a href="#" class="remove_field" style="margin-left:10px;">Удалить критерий</a></div>'); //add input field
+        }
+    });  
+    $('.input_fields_container_part').on("click",".remove_field", function(e){ //user click on remove text links
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+    ////////////////////////////////////////////////////////////
+    var max_fields_limit2      = 100; //set limit for maximum input fields
+    var x2 = 1; //initialize counter for text box
+    $('.add_more_button2').click(function(e){ //click event on add more fields button having class add_more_button
+        e.preventDefault();
+        if(x2 < max_fields_limit2){ //check conditions
+            x++; //counter increment
+            $('.input_fields_container_part2').append('<div><input type="text" name="tags2"/><a href="#" class="remove_field2" style="margin-left:10px;">Удалить вариант</a></div>'); //add input field
+        }
+    });  
+    $('.input_fields_container_part2').on("click",".remove_field2", function(e){ //user click on remove text links
+        e.preventDefault(); $(this).parent('div').remove(); x2--;
+    })
+    
+    $('.start').click(function(e){
+        e.preventDefault();
+            for(var i =0 ; i < 50; i++){
+                
+                $('.selectdiv').append('<p>критерий '+i+'<select name = "select"class="select_class"> <option>значительно хуже</option> <option>хуже</option><option>между немного хуже и хуже</option> <option>немного хуже</option><option>не лучше и не хуже </option><option>немного лучше</option><option>между немного лучше и лучше</option><option>лучше </option><option>значительно лучше</option></select>относительно критерия'+i+' </p>'
+                    );          
+                 } });
+});
+</script>
+
+</div>
+{%endblock %}

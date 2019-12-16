@@ -1,0 +1,36 @@
+{%extends 'main/base.html'%}
+{%block content%}
+
+<h1>История ползователя: {{user.username}}</h1>
+ {%for i in lis%}
+        <div class="container">
+            <div style="background: rgba(13, 119, 190, 0.5)">
+            <h3>Карточка "{{i.name}}"</h3>
+        </div>
+            <table class ="table">
+            
+            <tr>
+            <th scope="col"><p>Пользователь</p></th>
+            <th scope="col">{{i.user}}</th>
+            </tr>
+            <tr>
+            <th scope="col"><p>критерии</p></th>
+            <th scope="col">{{i.criterian}}</th>
+            </tr>
+            <tr>
+            <th scope="col"><p>варианты</p></th>
+            <th scope="col">{{i.variants}}</th>
+            </tr>
+            <tr>
+            <th scope="col"><p>результат</p></th>
+            <th scope="col">{{i.selection_result}}</th>
+            </tr>
+            </tr>
+            <tr>
+            <th scope="col"><p>Дата добавдения</p></th>
+            <th scope="col">{{i.selection_add}}</th>
+            </tr>
+</table>
+            </div>
+           {%endfor%} 
+{%endblock%}

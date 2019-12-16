@@ -1,0 +1,21 @@
+{%extends 'main/base.html'%}
+{% load crispy_forms_tags %}
+{%block content%}
+
+<div class="row justify-content-center md-15">
+	<div class="col-5">
+		<div class="card">	
+			<div class="card-body">
+				<div class="row justify-content-center md-15">
+				<p class="h3">Регистрация</p>
+				<div>
+				<form method="post">
+				{% csrf_token %}
+				{{ form|crispy}}
+				<button type="submit" class="btn btn-outline-success my-2 my-sm-0 mr-2">Зарегистрироваться!</button>
+				</form>	
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
