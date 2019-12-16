@@ -12,7 +12,6 @@ django-heroku = "*"
 urllib3 = "*"
 numpy = "*"
 request = "*"
-bootstrap = "*"
 django-crispy-forms = "*"
 
 [requires]
