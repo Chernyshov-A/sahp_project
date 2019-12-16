@@ -130,6 +130,6 @@ dmypy.json
 
 # Text backup files
 *.bak
-
+*.env
 #Database
 *.sqlite3
