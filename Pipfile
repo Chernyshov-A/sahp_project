@@ -9,7 +9,6 @@ verify_ssl = true
 gunicorn = "*"
 django = "*"
 django-heroku = "*"
-urllib = "*"
 urllib3 = "*"
 numpy = "*"
 request = "*"
