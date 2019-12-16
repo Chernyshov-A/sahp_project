@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 gunicorn = "*"
 django-heroku = "*"
-django2-1 = "*"
+django2.1 = "*"
 django = "==2.1"
 urllib = "*"
 urllib3 = "*"
