@@ -12,6 +12,6 @@ public==2019.4.13
 pytz==2019.3
 query-string==2019.4.13
 request==2019.4.13
-sqlparse==0.3.0
+sqlparse==0.4.4
 urllib3==1.25.7
 whitenoise==5.0.1
